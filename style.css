@@ -85,7 +85,6 @@
     font-family: "bariol_regularregular", Arial;
     letter-spacing: 0.01em;
     font-size: 14px;
-    padding: 40px;
     text-rendering: optimizeLegibility;
     margin: 0px;
     height: 100%;
@@ -292,12 +291,8 @@ h1 {
     }
 }
 
-.calcButton {
-    position:absolute;
-    transition: .5s ease;
-    top: 50%;
-    left: 50%;
-}
+
+
 
 
 .dropdown-description {
@@ -1048,4 +1043,12 @@ td {
     transition: .5s ease;
     top: 99%;
     left: 50%;
+}
+
+.hidden {
+    display:none;
+}
+
+.unhidden {
+    display:block;
 }
