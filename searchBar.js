@@ -7,10 +7,15 @@ d3.csv("firstdraft.csv",function (csv) {
     start();
 });
 
-var Recommended = [50, 65, 20, 300, 18, 2400, 3500, 400, 1000, 1500, 10, 6, 20, 1.7, 1000, 1.5, 60];
-var Nutrients = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var Final = new Array(17);
-var Percentages = new Array(17);
+var Recommended, Nutrients, Final, Percentages, count;
+function initialize() {
+    Recommended = [50, 65, 20, 300, 18, 2400, 3500, 400, 1000, 1500, 10, 6, 20, 1.7, 1000, 1.5, 60];
+    Nutrients = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    Final = new Array(17);
+    Percentages = new Array(17);
+    count = 1;
+}
+initialize();
     
 //Call back for when user selects an option
 function onSelect(d) {
@@ -33,6 +38,7 @@ function onSelect(d) {
     Nutrients[16] += +d.VitaminC;
     console.log(Nutrients);
     start();
+    count++;
 }
 
 //Setup and render the autocomplete
@@ -70,4 +76,13 @@ function calc() {
     document.getElementById("Ca").innerHTML = Percentages[14];
     document.getElementById("Th").innerHTML = Percentages[15];
     document.getElementById("VC").innerHTML = Percentages[16];
+}
+
+function reset() {
+    for(i=0; i<count; i++){
+        var element = document.getElementById("bp-ac");
+        element.parentNode.removeChild(element);
+    }
+    initialize();
+    start();
 }
