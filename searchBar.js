@@ -7,13 +7,14 @@ d3.csv("firstdraft.csv",function (csv) {
     start();
 });
 
-var Recommended, Nutrients, Final, Percentages, count;
+var Recommended, Nutrients, Final, Percentages, count, calculated;
 function initialize() {
     Recommended = [50, 65, 20, 300, 18, 2400, 3500, 400, 1000, 1500, 10, 6, 20, 1.7, 1000, 1.5, 60];
     Nutrients = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     Final = new Array(17);
     Percentages = new Array(17);
     count = 1;
+    calculated = false;
 }
 initialize();
     
@@ -76,12 +77,15 @@ function calc() {
     document.getElementById("Ca").innerHTML = Percentages[14];
     document.getElementById("Th").innerHTML = Percentages[15];
     document.getElementById("VC").innerHTML = Percentages[16];
+    calculated = true;
 }
 
 function reset() {
-    for(i=0; i<count; i++){
-        var element = document.getElementById("bp-ac");
-        element.parentNode.removeChild(element);
+    if (calculated==false){
+        removeBars();
+    }
+    if (calculated==true){
+        reveal(result);
     }
     initialize();
     start();
@@ -90,17 +94,6 @@ function reset() {
 function removeBars() {
     for(i=0; i<count; i++){
         document.getElementById("bp-ac").remove();
-    }
-}
-
-Element.prototype.remove = function() {
-    this.parentElement.removeChild(this);
-}
-NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-    for(var i = this.length - 1; i >= 0; i--) {
-        if(this[i] && this[i].parentElement) {
-            this[i].parentElement.removeChild(this[i]);
-        }
     }
 }
 

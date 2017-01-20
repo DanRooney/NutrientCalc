@@ -27,16 +27,16 @@ footer {
     bottom:0;
     text-align:center;
     width:100%;
-    font-size:14px;
+    font-size:12px;
 }
 
 .footer_background {
     background-color: #0d693b;
     display: inline-block;
-    width: 600px;
+    width: 60%;
     vertical-align: bottom;
     border-radius: 5px 5px 5px 5px;
-    padding:10px;
+    padding:2px;
 }
 
 .bp-autocomplete-holder {
@@ -339,4 +339,8 @@ input[type="checkbox"] {
 
 a:visited {
     color: #570051;
+}
+p {
+    padding:0px;
+    margin:0px;
 }
