@@ -7,10 +7,10 @@
     <script language="JavaScript" src="searchBar.js"></script>
     <link rel="stylesheet" href="style.css"/>
 
-    <h2>Daily Nutrient Intake Calculator</h2>
-    <h5>Make a list of every food you ate today, then click "Calculate Nutrient Profile"</h5>
+    <h1>Daily Nutrient Intake Calculator</h1>
+    <h4>Make a list of every food you ate today, then click "Calculate Nutrient Profile"</h4>
 </head>
-<body>
+<body text="white">
 <script>
 function reveal(span) {
     var className = span.getAttribute("class");
@@ -23,28 +23,44 @@ function reveal(span) {
 }
 </script>
 <div id="test" style="width:100%; height:100%;"></div>
-<button onclick="calc();reveal(result);">Calculate Nutrient Profile</button>
-<button onclick=reset();>Reset</button>
+<button class="btn" onclick="calc();reveal(result);removeBars();">Calculate Nutrient Profile</button>
+<!--<button class="btn" onclick=reset();reveal(result);>Reset</button>-->
 <span id="result" class="hidden">
-    <p><a id="VA"></a>% of your recommended intake of Vitamin A</p>
-    <p><a id="VB"></a>% of your recommended intake of Vitamin B12</p>
-    <p><a id="VC"></a>% of your recommended intake of Vitamin C</p>
-    <p><a id="VD"></a>% of your recommended intake of Vitamin D</p>
-    <p><a id="VE"></a>% of your recommended intake of Vitamin E</p>
-    <p><a id="Pr"></a>% of your recommended intake of Protein</p> 
-    <p><a id="TF"></a>% of your recommended intake of Total Fat</p>
-    <p><a id="SF"></a>% of your recommended intake of Saturated Fat</p>
-    <p><a id="Ch"></a>% of your recommended intake of Cholesterol</p>
-    <p><a id="Ir"></a>% of your recommended intake of Iron</p>
-    <p><a id="So"></a>% of your recommended intake of Sodium</p>
-    <p><a id="Po"></a>% of your recommended intake of Potassium</p>
-    <p><a id="Ma"></a>% of your recommended intake of Magnesium</p>
-    <p><a id="Ph"></a>% of your recommended intake of Phosphorus</p>
-    <p><a id="Ri"></a>% of your recommended intake of Riboflavin</p>
-    <p><a id="Ca"></a>% of your recommended intake of Calcium</p>
-    <p><a id="Th"></a>% of your recommended intake of Thiamin</p> 
+        <p><a id="VA"></a>% of your recommended intake of Vitamin A</p>
+        <p><a id="VB"></a>% of your recommended intake of Vitamin B12</p>
+        <p><a id="VC"></a>% of your recommended intake of Vitamin C</p>
+        <p><a id="VD"></a>% of your recommended intake of Vitamin D</p>
+        <p><a id="VE"></a>% of your recommended intake of Vitamin E</p>
+        <p><a id="Pr"></a>% of your recommended intake of Protein</p> 
+        <p><a id="TF"></a>% of your recommended intake of Total Fat</p>
+        <p><a id="SF"></a>% of your recommended intake of Saturated Fat</p>
+        <p><a id="Ch"></a>% of your recommended intake of Cholesterol</p>
+        <p><a id="Ir"></a>% of your recommended intake of Iron</p>
+        <p><a id="So"></a>% of your recommended intake of Sodium</p>
+        <p><a id="Po"></a>% of your recommended intake of Potassium</p>
+        <p><a id="Ma"></a>% of your recommended intake of Magnesium</p>
+        <p><a id="Ph"></a>% of your recommended intake of Phosphorus</p>
+        <p><a id="Ri"></a>% of your recommended intake of Riboflavin</p>
+        <p><a id="Ca"></a>% of your recommended intake of Calcium</p>
+        <p><a id="Th"></a>% of your recommended intake of Thiamin</p> 
 </span>
 </body>
+
+<footer>
+    <span class="footer_background">
+        
+      <div style='float:left; width:33%'>
+      <strong>Created by:</strong> Daniel Rooney
+      </div> 
+      <div style='float:right; width:33%'>
+      <strong>Source code:</strong> <a href="https://github.com/DanRooney/NutrientCalc">My GitHub</a>
+      </div>
+      <div style='float:right; width:33%'>
+      <strong>Nutritional facts provided by:</strong> <a href="http://www.hc-sc.gc.ca/fn-an/nutrition/fiche-nutri-data/index-eng.php">Canadian Nutrient File, Health Canada</a> and <a href="http://www.fda.gov/Food/GuidanceRegulation/GuidanceDocumentsRegulatoryInformation/LabelingNutrition/ucm064928.htm">the FDA Food Labeling Guide</a>
+      </div>
+        
+    </span>
+</footer>
 
 </html>
 
