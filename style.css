@@ -344,3 +344,32 @@ p {
     padding:0px;
     margin:0px;
 }
+
+.widget {
+  display: inline-block;
+}
+
+#chart {
+  height: 550px;
+  width: 550px;
+}
+
+svg {
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: #0d693b;
+}
+
+.value {
+  font-size: 16px;
+  font-weight: 300;
+  fill: white;
+}
+
+.label {
+  font-size: 18px;
+  fill: white;
+}
+

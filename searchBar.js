@@ -53,31 +53,119 @@ function start() {
         .onSelected(onSelect)
         .render();
 }
-    
+
+  
 //Calculate user's nutrient profile
 function calc() {
     for(var i=0; i<17; i++){
         Percentages[i] = Math.round((Nutrients[i] / Recommended[i]) * 100); //Percentage of recommended nutrients in user
         Final[i] = Recommended[i] - Nutrients[i]; //Every positive value indicates a deficiency
     }
-    document.getElementById("Pr").innerHTML = Percentages[0];
-    document.getElementById("TF").innerHTML = Percentages[1];
-    document.getElementById("SF").innerHTML = Percentages[2];
-    document.getElementById("Ch").innerHTML = Percentages[3];
-    document.getElementById("Ir").innerHTML = Percentages[4];
-    document.getElementById("So").innerHTML = Percentages[5];
-    document.getElementById("Po").innerHTML = Percentages[6];
-    document.getElementById("Ma").innerHTML = Percentages[7];
-    document.getElementById("Ph").innerHTML = Percentages[8];
-    document.getElementById("VA").innerHTML = Percentages[9];
-    document.getElementById("VD").innerHTML = Percentages[10];
-    document.getElementById("VB").innerHTML = Percentages[11];
-    document.getElementById("VE").innerHTML = Percentages[12];
-    document.getElementById("Ri").innerHTML = Percentages[13];
-    document.getElementById("Ca").innerHTML = Percentages[14];
-    document.getElementById("Th").innerHTML = Percentages[15];
-    document.getElementById("VC").innerHTML = Percentages[16];
-    calculated = true;
+var data = [
+    ["Vitamin A", Percentages[9]],
+    ["Vitamin B12", Percentages[11]],
+    ["Vitamin C", Percentages[16]],
+    ["Vitamin D", Percentages[10]],
+    ["Vitamin E", Percentages[12]],
+    ["Protein", Percentages[0]],
+    ["Total Fat", Percentages[1]],
+    ["Saturated Fat", Percentages[2]],
+    ["Cholesterol", Percentages[3]],
+    ["Iron", Percentages[4]],
+    ["Sodium", Percentages[5]],
+    ["Potassium", Percentages[6]],
+    ["Magnesium", Percentages[7]],
+    ["Phosphorus", Percentages[8]],
+    ["Riboflavin", Percentages[13]],
+    ["Calcium", Percentages[14]],
+    ["Thiamin", Percentages[15]]
+];
+
+console.log(data);
+
+var chart = document.getElementById("chart"),
+    axisMargin = 20,
+    margin = 20,
+    valueMargin = 4,
+    width = 50,
+    height = 50,
+    barHeight = 20,
+    barPadding = 5;
+    var data, bar, svg, scale, xAxis, labelWidth = 0;
+
+max = d3.max(data.map(function(i){ 
+  return i[1];
+}));
+
+svg = d3.select(chart)
+  .append("svg")
+  .attr("width", 500)
+  .attr("height", 750);
+
+
+bar = svg.selectAll("g")
+  .data(data)
+  .enter()
+  .append("g");
+
+bar.attr("class", "bar")
+  .attr("cx",0)
+  .attr("transform", function(d, i) { 
+     return "translate(" + margin + "," + (i * (barHeight + barPadding) + barPadding) + ")";
+  });
+
+bar.append("text")
+  .attr("class", "label")
+  .attr("y", barHeight / 2)
+  .attr("dy", ".35em") //vertical align middle
+  .attr("dx", 30) //margin right
+  .text(function(d){
+    return d[0];
+  }).each(function() {
+    labelWidth = Math.ceil(Math.max(labelWidth, this.getBBox().width));
+  });
+
+scale = d3.scale.linear()
+  .domain([0, max])
+  .range([0, width - margin*2 - labelWidth]);
+
+xAxis = d3.svg.axis()
+  .scale(scale)
+  .tickSize(-height + 2*margin + axisMargin)
+  .orient("bottom");
+
+bar.append("rect")
+  .attr("transform", "translate(145, 0)")
+  .attr("height", barHeight)
+  .attr("width", function(d){
+    return (d[1])*3;
+  });
+
+bar.append("text")
+  .attr("class", "value")
+  .attr("y", barHeight / 2)
+  .attr("dx", 20) //margin right
+  .attr("dy", ".35em") //vertical align middle
+  .attr("text-anchor", "end")
+  .text(function(d){
+    return d[1] + "%";
+  })
+ .attr("x", function(d){
+    var width = this.getBBox().width;
+    return Math.max(width + valueMargin, scale(d[1]));
+  });
+
+calculated = true;
+}
+
+function reveal(span) {
+    var className = span.getAttribute("class");
+    if(className=="hidden") {
+      span.className = "unhidden";
+    }
+    else {
+      span.className = "hidden";
+    }
 }
 
 function reset() {
@@ -86,6 +174,9 @@ function reset() {
     }
     if (calculated==true){
         reveal(result);
+        var bars = document.getElementById("chart");
+        bars.parentNode.removeChild(bars);
+        //TODO:RECREATE CHART DIV
     }
     initialize();
     start();
@@ -97,3 +188,7 @@ function removeBars() {
     }
 }
 
+/*
+RECOMMENDED DAILY VALUES
+http://www.fda.gov/Food/GuidanceRegulation/GuidanceDocumentsRegulatoryInformation/LabelingNutrition/ucm064928.htm
+*/
